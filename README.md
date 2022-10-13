@@ -1,2 +1,2 @@
-# BSU_contract
-Baby Shark Universe smart contract
+# BSU_contracts
+Baby Shark Universe smart contracts
