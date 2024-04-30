@@ -13,9 +13,7 @@ contract BabysharkUniverseToken is ERC20, Pausable, AccessControlEnumerable {
 
     constructor() ERC20("Baby Shark Universe Token", "BSU") {
 
-        _setupRole(OWNER_ROLE, msg.sender);
-
-        // If roleAdmin is not set, grantRole does not work properly
+        _setupRole(OWNER_ROLE, msg.sender);        
         _setRoleAdmin(OWNER_ROLE, OWNER_ROLE);        
 
         _mint(msg.sender, 850000000 * 10**uint(decimals()));
