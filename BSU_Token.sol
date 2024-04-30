@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity 0.8.20;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/access/AccessControlEnumerable.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts@4.9.5/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts@4.9.5/access/AccessControlEnumerable.sol";
+import "@openzeppelin/contracts@4.9.5/security/Pausable.sol";
 
 contract BabysharkUniverseToken is ERC20, Pausable, AccessControlEnumerable {
     event TokensBurned(address request, uint256 amount); 
@@ -14,9 +14,11 @@ contract BabysharkUniverseToken is ERC20, Pausable, AccessControlEnumerable {
     constructor() ERC20("Baby Shark Universe Token", "BSU") {
 
         _setupRole(OWNER_ROLE, msg.sender);
+
+        // If roleAdmin is not set, grantRole does not work properly
         _setRoleAdmin(OWNER_ROLE, OWNER_ROLE);        
 
-        _mint(msg.sender, 1500000000 * 10**uint(decimals()));
+        _mint(msg.sender, 850000000 * 10**uint(decimals()));
     }
 
     function distributeTokens(
@@ -54,10 +56,11 @@ contract BabysharkUniverseToken is ERC20, Pausable, AccessControlEnumerable {
         return true;
     }
 
+
     modifier onlyOwner() {
         require(
             hasRole(OWNER_ROLE, msg.sender),
-            "caller is not an owner"
+            "MyContract: caller is not an owner"
         );
         _;
     }
